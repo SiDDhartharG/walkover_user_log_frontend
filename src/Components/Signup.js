@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button } from "@mui/material";
+import API from "../Api/api";
+import { useNavigate } from "react-router-dom";
 function Signup(props) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") && localStorage.getItem("token") !== "") {
+      navigate("/home");
+    }
+  }, []);
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -14,16 +22,21 @@ function Signup(props) {
       [name]: value,
     });
   }
-  function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { name, email, password, confirm_password } = userDetails;
     if ((name, email && password === confirm_password)) {
-      console.log(userDetails);
+      const response = await API.signup({ name, email, password });
+      if (response.status === 201) {
+        localStorage.setItem("token", response?.data?.token);
+        navigate("/home");
+        return;
+      }
     } else {
       console.log("password and confirmpassword dont match");
     }
-  }
+  };
   return (
     <div className="signup">
       <div className="signup-form">
@@ -60,7 +73,7 @@ function Signup(props) {
           onChange={handleChange}
         />
         <Button variant="contained" onClick={handleSubmit}>
-         Signup
+          Signup
         </Button>
       </div>
     </div>
