@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
@@ -18,7 +19,8 @@ function Home(props) {
             <span>Username</span>
           </div>
           <div className="nav-right-logout">
-            <button onClick={onLogoutClick}>LogOut</button>
+          <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
+
           </div>
         </div>
       </div>
