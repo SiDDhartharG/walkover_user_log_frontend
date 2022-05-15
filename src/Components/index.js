@@ -5,5 +5,5 @@ import Dashboard from "./Dashboard";
 import Landing from "./Landing";
 import TableCard from "./TableCard";
 import TableView from "./TableView";
-
-export { Home, Login, Signup, Dashboard, Landing,TableCard ,TableView };
+import CreateTable from "./CreateTable";
+export { Home, Login, Signup, Dashboard, Landing,TableCard ,TableView ,CreateTable };
