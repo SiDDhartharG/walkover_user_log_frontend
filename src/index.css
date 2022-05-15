@@ -47,6 +47,22 @@ margin:auto;
 }
 
 /* login-signup*/
+.login-signup{
+  width:50%;
+  height:400px;
+  margin: auto;
+  margin-top: 50px; 
+}
+.header{
+  text-align: center;
+}
+
+.login-signup-form{
+  width:80%;
+  height:60%;
+  margin: auto;
+}
+
 
 
 .nav{

@@ -22,7 +22,7 @@ function Landing(props) {
   }
   function handleSigninCLick(e){
     e.preventDefault();
-    navigate('/signin');
+    navigate('/signup');
   }
 
   return (

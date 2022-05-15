@@ -23,7 +23,7 @@ function Login(props) {
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(userDetails);
     const { email, password } = userDetails;
     const response = await API.login({ email, password });
     if (response.status === 201) {
@@ -33,27 +33,43 @@ function Login(props) {
     }
   };
   return (
-    <div className="login">
-      <div className="login-form"></div>
-      <TextField
-        label="email"
-        name="email"
-        value={userDetails.email}
-        color="secondary"
-        focused
-        onChange={handleChange}
-      />
-      <TextField
-        label="password"
-        name="password"
-        value={userDetails.password}
-        color="secondary"
-        focused
-        onChange={handleChange}
-      />
-      <Button variant="contained" onClick={handleSubmit}>
-        Login
-      </Button>
+    <div className="login-signup">
+      <div className="header">
+      <h1>Login</h1>
+      </div>
+      <div className="login-signup-form">
+        <div className="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            name="email"
+            value={userDetails.email}
+            onChange={handleChange}
+          />
+          <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
+        </div>
+        <div className="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            name="password"
+            value={userDetails.password}
+            onChange={handleChange}
+          />
+        </div>
+        <Button variant="contained" onClick={handleSubmit} style={{marginTop:"20px"}}>
+          Login
+        </Button>
+      </div>
     </div>
   );
 }
