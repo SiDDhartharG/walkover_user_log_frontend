@@ -11,7 +11,7 @@ function CreateTable(props) {
   return (
     <div>
       <div className="nav">
-        <div className="nav-left">
+        <div className="nav-left" >
           <span>UserLogs</span>
         </div>
         <div className="nav-right">

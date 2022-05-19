@@ -8,15 +8,18 @@ function Home(props) {
     localStorage.removeItem("token");
     navigate("/");
   };
+  const handleClick=(e)=>{
+    navigate("/home");
+  }
   return (
     <div>
       <div className="nav">
-        <div className="nav-left">
+        <div className="nav-left" onClick={handleClick}>
           <span>UserLogs</span>
         </div>
         <div className="nav-right">
           <div className="nav-right-user">
-            <span>Username</span>
+            <span>Hello {props.userDetails.username} !</span>
           </div>
           <div className="nav-right-logout">
           <Button color="secondary" onClick={onLogoutClick}>Logout</Button>

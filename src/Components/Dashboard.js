@@ -13,6 +13,7 @@ function Dashboard(props) {
   }
   return (
     <div className="dashboard">
+      <h1>here is your data</h1>
       <div className="table-list">
         <TableCard />
         <TableCard />
