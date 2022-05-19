@@ -13,29 +13,12 @@ function App() {
   //     navigate("/");
   //   }
   // }, []);
-  const [userDetails,setUserDetails]=useState({
-    email:"",
-    username:"",
-    tables:[]
-  })
-  useEffect(()=>{
-     
-     if(localStorage.getItem("token"))
-     {
-       const token=localStorage.getItem("token");
-       const user=jwtDecode(token);
-       console.log(user);
-       setUserDetails({
-         username:user.userName,
-         email:user.email
-       })
-     }
-  },[])
+  
   return (
     <>
       <Routes>
         <Route exact="true" path="/" element={<Landing />} />
-        <Route path="/home" element={<Home userDetails={userDetails}/>} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/table/:tablename" element={<TableView />} />

@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
-import React, { useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 function Home(props) {
@@ -11,6 +12,24 @@ function Home(props) {
   const handleClick=(e)=>{
     navigate("/home");
   }
+  const [userDetails,setUserDetails]=useState({
+    email:"",
+    username:"",
+    tables:[]
+  })
+  useEffect(()=>{
+     
+     if(localStorage.getItem("token"))
+     {
+       const token=localStorage.getItem("token");
+       const user=jwtDecode(token);
+       console.log(user);
+       setUserDetails({
+         username:user.userName,
+         email:user.email
+       })
+     }
+  },[])
   return (
     <div>
       <div className="nav">
@@ -19,7 +38,7 @@ function Home(props) {
         </div>
         <div className="nav-right">
           <div className="nav-right-user">
-            <span>Hello {props.userDetails.username} !</span>
+            <span>Hello {userDetails.username} !</span>
           </div>
           <div className="nav-right-logout">
           <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
