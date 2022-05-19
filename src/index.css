@@ -107,4 +107,23 @@ margin:auto;
   margin-top: 20px;
   text-align: center;
 }
+/*Table*/
+.creattable-div{
+  margin:50px auto;
+  width:60%;
+}
+.creattable-header{
+  font-size: 1rem;
+  color:grey;
+  width:auto;
+  margin: 30px;
+}
+.creattable-form{
+  width:80%;
+  margin:auto;
+  line-height: 2.5;
+}
+.creattable-form .form-group{
+ width:50%; 
+}
 
