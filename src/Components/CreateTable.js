@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import API from "../Api/api";
 
 function CreateTable(props) {
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ function CreateTable(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(tableDetails);
+   //code for submitting entities name and adding table
+
+   //after adding table redirecting to dashboard
+   navigate('/home');
   };
   return (
     <div>
@@ -78,7 +83,7 @@ function CreateTable(props) {
           <div className="form-group">
             <label for="email-entity">Email Entity</label>
             <input
-              type="email"
+              type="text"
               className="form-control"
               id="email-entity"
               placeholder="Enter Email Entity"
@@ -90,7 +95,7 @@ function CreateTable(props) {
           <div className="form-group">
             <label for="phoneno-entity">Phone Number Entity</label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               id="phoneno-entity"
               placeholder="Enter Phone number Entity name"
@@ -102,7 +107,7 @@ function CreateTable(props) {
           <div className="form-group">
             <label for="date-entity">Date Entity</label>
             <input
-              type="date"
+              type="text"
               className="form-control"
               id="date-entity"
               placeholder="Enter Date Entity name"

@@ -112,7 +112,7 @@ margin:auto;
   margin:50px auto;
   width:60%;
 }
-.creattable-header{
+.creattable-header {
   font-size: 1rem;
   color:grey;
   width:auto;
@@ -125,5 +125,27 @@ margin:auto;
 }
 .creattable-form .form-group{
  width:50%; 
+}
+.tableview-div{
+  width:80%;
+  margin:40px auto;
+}
+.tableview-table{
+  width:90%;
+  margin :20px auto;
+}
+.tableview-header span{
+  font-size: 1rem;
+  color:grey;
+  width:auto;
+  margin: 30px;
+}
+.add-row{
+  width:200px;
+  margin:20px auto; 
+}
+.actions{
+  text-align: center;
+  width:auto;
 }
 

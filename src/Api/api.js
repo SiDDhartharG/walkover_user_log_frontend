@@ -11,6 +11,9 @@ const API = {
     const signupApi = "/api/user/signup";
     return await publicAxios.post(signupApi, payload);
   },
+  addTable:async (payload)=>{
+    console.log(payload);
+  }
 };
 
 export default API;
