@@ -1,35 +1,28 @@
-import { Button } from "@mui/material";
+import { Button, getTableBodyUtilityClass } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../Api/api";
-
+import { GetTablesFromToken } from '../Utils/token'
 function CreateTable(props) {
   const navigate = useNavigate();
   const onLogoutClick = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
-  const [tableDetails, setTableDetails] = useState({
-    tableName: "",
-    nameEntity: "",
-    emailEntity: "",
-    phonenoEntity: "",
-    dateEntity: "",
-  });
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setTableDetails({
-      ...tableDetails,
-      [name]: value,
-    });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(tableDetails);
-   //code for submitting entities name and adding table
-
-   //after adding table redirecting to dashboard
-   navigate('/home');
+  const [tableDetails, setTableDetails] = useState("")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (GetTablesFromToken()?.includes(tableDetails)) {
+      // ::ERROR already table exists
+    } else {
+      console.log("HELLo");
+      const response = await API.addTable(tableDetails)
+      if (response.status === 201) {
+        localStorage.setItem("token", response?.data?.token)
+        navigate("/home");
+      }
+    }
+    console.log("DONE");
   };
   return (
     <div>
@@ -64,56 +57,8 @@ function CreateTable(props) {
               id="tablename"
               placeholder="Enter Name of the table"
               name="tableName"
-              value={tableDetails.tableName}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label for="name-entity">Name Entity</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name-entity"
-              placeholder="Enter Name Entity"
-              name="nameEntity"
-              value={tableDetails.nameEntity}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label for="email-entity">Email Entity</label>
-            <input
-              type="text"
-              className="form-control"
-              id="email-entity"
-              placeholder="Enter Email Entity"
-              name="emailEntity"
-              value={tableDetails.emailEntity}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label for="phoneno-entity">Phone Number Entity</label>
-            <input
-              type="text"
-              className="form-control"
-              id="phoneno-entity"
-              placeholder="Enter Phone number Entity name"
-              name="phonenoEntity"
-              value={tableDetails.phonenoEntity}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label for="date-entity">Date Entity</label>
-            <input
-              type="text"
-              className="form-control"
-              id="date-entity"
-              placeholder="Enter Date Entity name"
-              name="dateEntity"
-              value={tableDetails.dateEntity}
-              onChange={handleChange}
+              value={tableDetails}
+              onChange={(e) => { setTableDetails(e?.target?.value) }}
             />
           </div>
           <Button

@@ -11,8 +11,8 @@ const API = {
     const signupApi = "/api/user/signup";
     return await publicAxios.post(signupApi, payload);
   },
-  addTable:async (payload)=>{
-    console.log(payload);
+  addTable: async (payload) => {
+    return await protectedAxios.post(`/api/table/${payload}`)
   }
 };
 

@@ -3,33 +3,31 @@ import jwtDecode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
-function Home(props) {
+function Home() {
   const navigate = useNavigate();
   const onLogoutClick = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
-  const handleClick=(e)=>{
+  const handleClick = (e) => {
     navigate("/home");
   }
-  const [userDetails,setUserDetails]=useState({
-    email:"",
-    username:"",
-    tables:[]
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    username: "",
+    tables: []
   })
-  useEffect(()=>{
-     
-     if(localStorage.getItem("token"))
-     {
-       const token=localStorage.getItem("token");
-       const user=jwtDecode(token);
-       console.log(user);
-       setUserDetails({
-         username:user.userName,
-         email:user.email
-       })
-     }
-  },[])
+  useEffect(() => {
+
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      const user = jwtDecode(token);
+      setUserDetails({
+        username: user.userName,
+        email: user.email
+      })
+    }
+  }, [])
   return (
     <div>
       <div className="nav">
@@ -41,7 +39,7 @@ function Home(props) {
             <span>Hello {userDetails.username} !</span>
           </div>
           <div className="nav-right-logout">
-          <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
+            <Button color="secondary" onClick={onLogoutClick}>Logout</Button>
 
           </div>
         </div>

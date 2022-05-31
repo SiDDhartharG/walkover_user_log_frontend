@@ -4,31 +4,25 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import React from "react";
 import { TableCard } from "./";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { GetTablesFromToken } from "../Utils/token";
 
 function Dashboard(props) {
   const navigate = useNavigate();
-  function handleAddClick(e){
+  function handleAddClick(e) {
     e.preventDefault();
-    navigate('/createtable')
+    navigate('/create-table')
   }
   return (
     <div className="dashboard">
-      <h1>here is your data</h1>
       <div className="table-list">
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
-        <TableCard />
+        {
+          GetTablesFromToken().map(tableName => {
+            return <TableCard tableName={tableName} />
+          })
+        }
       </div>
       <div className="add" onClick={handleAddClick}>
-          <AddCircleOutlineIcon color="primary" fontSize="large" />
+        Add Table<AddCircleOutlineIcon color="primary" fontSize="large" />
       </div>
     </div>
   );
