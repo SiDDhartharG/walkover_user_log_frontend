@@ -3,7 +3,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 
 
-export const REST_ROW = { name: "", email: "", number: "", date: "", }
+export const RESET_ROW = { name: "", email: "", phoneNumber: "", dob: "", }
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

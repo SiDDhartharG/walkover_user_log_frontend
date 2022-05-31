@@ -13,7 +13,16 @@ const API = {
   },
   addTable: async (payload) => {
     return await protectedAxios.post(`/api/table/${payload}`)
-  }
+  },
+  addEntity: async (payload) => {
+    return await protectedAxios.post(`/api/entity`, payload)
+  },
+  getAllEntities: async (tablename) => {
+    return await protectedAxios.get(`/api/entity/${tablename}`)
+  },
+  deleteEntityById: async (rowId) => {
+    return await protectedAxios.delete(`/api/entity/${rowId}`)
+  },
 };
 
 export default API;
