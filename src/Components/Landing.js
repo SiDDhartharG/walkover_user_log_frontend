@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import Login from "./Login";
 function Landing(props) {
   const navigate = useNavigate();
 
@@ -15,12 +11,13 @@ function Landing(props) {
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "") {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  function handleLoginCLick(e){
+  function handleLoginCLick(e) {
     e.preventDefault();
     navigate('/login');
   }
-  function handleSigninCLick(e){
+  function handleSigninCLick(e) {
     e.preventDefault();
     navigate('/signup');
   }

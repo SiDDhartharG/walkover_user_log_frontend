@@ -1,8 +1,8 @@
 import { Table, TableBody, TableContainer, TableHead, TableRow, Paper, Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import EditIcon from "@mui/icons-material/Edit";
+// import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { RESET_ROW, StyledTableCell, StyledTableRow } from "../Utils/tableView";
 import API from "../Api/api";
@@ -14,6 +14,7 @@ function TableView() {
   const [newRowDetails, setNewRowDetails] = useState(RESET_ROW);
   useEffect(() => {
     getAllTableEntities()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const getAllTableEntities = async () => {
     try {
@@ -24,11 +25,6 @@ function TableView() {
       console.log(error);
     }
   }
-  const onLogoutClick = () => {
-    localStorage.removeItem("token");
-    Navigate("/");
-  };
-
   function onClickAddRow() {
     setBoolAdd(!boolAdd);
   }
@@ -72,16 +68,6 @@ function TableView() {
   }
   return (
     <div>
-      <div className="nav">
-        <div className="nav-left">
-          <span style={{ fontSize: "30px" }}>UserLogs</span>
-        </div>
-        <div className="nav-right" style={{ justifyContent: "right" }}>
-          <Button color="secondary" onClick={onLogoutClick}>
-            Logout
-          </Button>
-        </div>
-      </div>
       <div className="tableview-div">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ fontSize: "30px" }}>Table: {tablename}</div>
@@ -152,8 +138,8 @@ function TableView() {
                     <StyledTableCell align="left">{new Date(row.dob)?.toDateString()}</StyledTableCell>
                     <StyledTableCell align="left">
                       <div className="actions">
-                        <DeleteIcon style={{ cursor: "pointer" }} onClick={() => { onClickDeleteRow(row._id) }} style={{ marginRight: "2px" }} />&nbsp;
-                        <EditIcon style={{ marginLeft: "2px" }} />
+                        <DeleteIcon style={{ marginRight: "2px", cursor: "pointer" }} onClick={() => { onClickDeleteRow(row._id) }} />&nbsp;
+                        {/* <EditIcon style={{ marginLeft: "2px" }} /> */}
                       </div>
                     </StyledTableCell>
                   </StyledTableRow>
@@ -161,6 +147,12 @@ function TableView() {
               </TableBody>
             </Table>
           </TableContainer>
+          {
+            rows?.length === 0 && <h5 onClick={onClickAddRow}
+              style={{ textAlign: "center", cursor: "pointer", margin: "10px", display: "flex", justifyContent: "center" }}>
+              No Row Added<AddCircleOutlineIcon />
+            </h5>
+          }
         </div>
       </div>
     </div >

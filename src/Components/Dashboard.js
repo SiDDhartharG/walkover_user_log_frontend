@@ -20,9 +20,9 @@ function Dashboard(props) {
             return <TableCard tableName={tableName} />
           })
         }
-      </div>
-      <div className="add" onClick={handleAddClick}>
-        Add Table<AddCircleOutlineIcon color="primary" fontSize="large" />
+        <TableCard showIcon={false} tableName={<div className="add" onClick={handleAddClick}>
+          Add Table<AddCircleOutlineIcon color="primary" fontSize="large" />
+        </div>} />
       </div>
     </div>
   );
