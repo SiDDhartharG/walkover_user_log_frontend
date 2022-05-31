@@ -1,5 +1,4 @@
 import { protectedAxios } from "./axios";
-import API_CONSTANT from "./Constant";
 
 export const interceptor = {
   requestInterceptor: () =>

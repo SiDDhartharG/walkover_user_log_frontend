@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import API from "../Api/api.js";
-function Login(props) {
+function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "") {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [userDetails, setUserDetails] = useState({
     email: "",
@@ -23,7 +24,6 @@ function Login(props) {
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(userDetails);
     const { email, password } = userDetails;
     const response = await API.login({ email, password });
     if (response.status === 201) {
@@ -35,7 +35,7 @@ function Login(props) {
   return (
     <div className="login-signup">
       <div className="header">
-      <h1>Login</h1>
+        <h1>Login</h1>
       </div>
       <div className="login-signup-form">
         <div className="form-group">
@@ -66,7 +66,7 @@ function Login(props) {
             onChange={handleChange}
           />
         </div>
-        <Button variant="contained" onClick={handleSubmit} style={{marginTop:"20px"}}>
+        <Button variant="contained" onClick={handleSubmit} style={{ marginTop: "20px" }}>
           Login
         </Button>
       </div>

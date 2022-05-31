@@ -19,7 +19,6 @@ function TableView() {
   const getAllTableEntities = async () => {
     try {
       const response = await API.getAllEntities(tablename)
-      console.log(response);
       setRows(response?.data?.data || [])
     } catch (error) {
       console.log(error);
@@ -53,7 +52,6 @@ function TableView() {
     }
     try {
       const response = await API.addEntity({ ...newRowDetails, tableName: tablename })
-      console.log(response);
       if (response.status === 201) {
         setNewRowDetails(RESET_ROW)
         setBoolAdd(!boolAdd);

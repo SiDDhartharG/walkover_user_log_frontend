@@ -11,14 +11,12 @@ function CreateTable() {
     if (GetTablesFromToken()?.includes(tableDetails)) {
       // ::ERROR already table exists
     } else {
-      console.log("HELLo");
       const response = await API.addTable(tableDetails)
       if (response.status === 201) {
         localStorage.setItem("token", response?.data?.token)
         navigate("/home");
       }
     }
-    console.log("DONE");
   };
   return (
     <div>

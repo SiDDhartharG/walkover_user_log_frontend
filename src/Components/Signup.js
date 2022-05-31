@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import API from "../Api/api";
 import { useNavigate } from "react-router-dom";
-function Signup(props) {
+function Signup() {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "") {
       navigate("/home");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -34,6 +35,7 @@ function Signup(props) {
         return;
       }
     } else {
+      // ::ERROR
       console.log("password and confirmpassword dont match");
     }
   };

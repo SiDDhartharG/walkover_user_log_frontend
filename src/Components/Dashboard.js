@@ -1,9 +1,7 @@
-import { Button, Card } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import React from "react";
 import { TableCard } from "./";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GetTablesFromToken } from "../Utils/token";
 
 function Dashboard(props) {
