@@ -21,7 +21,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { RESET_ROW, StyledTableCell, StyledTableRow } from "../Utils/tableView";
 import API from "../Api/api";
 import SearchIcon from "@mui/icons-material/Search";
-import { FILTER_OPTIONS } from "./FilterCategory";
 import { CategorySharp, Textsms, TextSnippet } from "@mui/icons-material";
 
 function TableView() {

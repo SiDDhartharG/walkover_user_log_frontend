@@ -20,7 +20,6 @@ function Dashboard(props) {
   } 
   return (
     <div className="dashboard">
-      {/* <div className="search-container"> */}
       <div className="search-bar">
         <SearchIcon style={{ marginLeft: "10px" }} />
         <input
