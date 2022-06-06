@@ -17,7 +17,7 @@ function Dashboard(props) {
   };
   const filterTable = (tableArray = []) => {
     return tableArray.filter(tableName => tableName.includes(searchProperties))
-  }
+  } 
   return (
     <div className="dashboard">
       {/* <div className="search-container"> */}
@@ -31,26 +31,7 @@ function Dashboard(props) {
           onChange={handleSearchChange}
         ></input>
       </div>
-      {/* <span style={{ margin: "60px" }}>
-          {searchProperties.searchResult.length} matching
-        </span> */}
-      {/* {
-          <div className="search-results">
-            <ul>
-              {searchProperties.searchResult.map((tableName) => {
-                return (
-                  <Link to={`/table/${tableName}`}>
-                    <li className="search-results-row">
-                      <span>{tableName}</span>
-                    </li>
-                  </Link>
-                );
-                return null;
-              })}
-            </ul>
-          </div>
-        } */}
-      {/* </div> */}
+     
       <div className="table-list">
         {filterTable(GetTablesFromToken()).map((tableName) => {
           return <TableCard tableName={tableName} />;
