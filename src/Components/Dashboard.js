@@ -7,41 +7,34 @@ import SearchIcon from "@mui/icons-material/Search";
 
 function Dashboard(props) {
   const navigate = useNavigate();
-  const [searchProperties, setSearchProperties] = useState({
-    searchText: "",
-    searchResult: [],
-  });
+  const [searchProperties, setSearchProperties] = useState("");
   function handleAddClick(e) {
     e.preventDefault();
     navigate("/create-table");
   }
   const handleSearchChange = (event) => {
-    setSearchProperties({
-      searchText: event.target.value,
-      searchResult: GetTablesFromToken().filter(
-        (tableName) => tableName == event.target.value
-      ),
-    });
-    console.log(searchProperties);
+    setSearchProperties(event.target.value);
   };
-
+  const filterTable = (tableArray = []) => {
+    return tableArray.filter(tableName => tableName.includes(searchProperties))
+  }
   return (
     <div className="dashboard">
-      <div className="search-container">
-        <div className="search-bar">
-          <SearchIcon style={{ marginLeft: "10px" }} />
-          <input
-            type="text"
-            name="tablename"
-            value={searchProperties.searchText}
-            placeholder="Enter Name of Table to search"
-            onChange={handleSearchChange}
-          ></input>
-        </div>
-        <span style={{ margin: "60px" }}>
+      {/* <div className="search-container"> */}
+      <div className="search-bar">
+        <SearchIcon style={{ marginLeft: "10px" }} />
+        <input
+          type="text"
+          name="tablename"
+          value={searchProperties.searchText}
+          placeholder="Enter Name of Table to search"
+          onChange={handleSearchChange}
+        ></input>
+      </div>
+      {/* <span style={{ margin: "60px" }}>
           {searchProperties.searchResult.length} matching
-        </span>
-        {
+        </span> */}
+      {/* {
           <div className="search-results">
             <ul>
               {searchProperties.searchResult.map((tableName) => {
@@ -56,10 +49,10 @@ function Dashboard(props) {
               })}
             </ul>
           </div>
-        }
-      </div>
+        } */}
+      {/* </div> */}
       <div className="table-list">
-        {GetTablesFromToken().map((tableName) => {
+        {filterTable(GetTablesFromToken()).map((tableName) => {
           return <TableCard tableName={tableName} />;
         })}
         <TableCard
