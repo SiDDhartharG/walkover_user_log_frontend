@@ -1,7 +1,7 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import React, { useState } from "react";
 import { TableCard } from "./";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GetTablesFromToken } from "../Utils/token";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -17,7 +17,7 @@ function Dashboard(props) {
   };
   const filterTable = (tableArray = []) => {
     return tableArray.filter(tableName => tableName.includes(searchProperties))
-  } 
+  }
   return (
     <div className="dashboard">
       <div className="search-bar">
@@ -30,7 +30,7 @@ function Dashboard(props) {
           onChange={handleSearchChange}
         ></input>
       </div>
-     
+
       <div className="table-list">
         {filterTable(GetTablesFromToken()).map((tableName) => {
           return <TableCard tableName={tableName} />;

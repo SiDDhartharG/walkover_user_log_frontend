@@ -11,7 +11,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Grid,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -21,7 +20,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { RESET_ROW, StyledTableCell, StyledTableRow } from "../Utils/tableView";
 import API from "../Api/api";
 import SearchIcon from "@mui/icons-material/Search";
-import { CategorySharp, Textsms, TextSnippet } from "@mui/icons-material";
 
 function TableView() {
   const { tablename } = useParams();
@@ -34,7 +32,6 @@ function TableView() {
   }, []);
   const [categorySearch, setCategorySearch] = useState("name");
   const [textSearch, setTextSearch] = useState("");
-  const [dateSearch,setDateSearch]=useState("")
   const getAllTableEntities = async () => {
     try {
       const response = await API.getAllEntities(tablename);
@@ -86,45 +83,47 @@ function TableView() {
       // ::ERROR
     }
   };
-  const filterRow=(RowArray=[])=>{
-    return RowArray.filter(row=>{
-    if(categorySearch==='name')
-    {
-      return row.name.includes(textSearch);
-    }
-    if(categorySearch==='email')
-    {
-      return row.email.includes(textSearch);
-    }
-    if(categorySearch==='phoneNumber')
-    {
-      return row.phoneNumber.toString().includes(textSearch);
-    }
-  })
+  const filterRow = (RowArray = []) => {
+    return RowArray.filter(row => {
+      if (categorySearch === 'name') {
+        return row.name.includes(textSearch);
+      }
+      if (categorySearch === 'email') {
+        return row.email.includes(textSearch);
+      }
+      if (categorySearch === 'phoneNumber') {
+        return row.phoneNumber.toString().includes(textSearch);
+      }
+      if (categorySearch === 'dob' && row?.dob && textSearch) {
+        const dateRow = new Date(row.dob)
+        const dateFilter = new Date(textSearch)
+        return dateRow.toDateString() === dateFilter.toDateString()
+      }
+      if (categorySearch === 'dob' && row?.dob === undefined && textSearch === "") {
+        return true
+      }
+      return false
+    })
   }
   return (
     <div>
       <div className="filter">
         <div className="search-bar">
           <SearchIcon style={{ marginLeft: "10px" }} />
-          <input
-            type="text"
-            name="searchText"
-            value={textSearch}
-            placeholder="Search"
-            onChange={(e)=>{
-              setTextSearch(e.target.value);
-            }}
-          ></input>
+          {
+            categorySearch === "dob" ?
+              <input type="date" value={textSearch} placeholder="Search On Date"
+                onChange={(e) => { setTextSearch(e.target.value); }}
+              ></input>
+              :
+              <input type="text" name="searchText" value={textSearch} placeholder="Search"
+                onChange={(e) => { setTextSearch(e.target.value); }}></input>
+          }
         </div>
-        <FormControl style={{width:"40%"}}>
+        <FormControl style={{ width: "40%" }}>
           <InputLabel id="demo-simple-select-label">Select</InputLabel>
-          <Select
-            value={categorySearch}
-            label="CategoryName"
-            onChange={(e) => {
-              setCategorySearch(e.target.value);
-            }}
+          <Select value={categorySearch} label="CategoryName"
+            onChange={(e) => { setTextSearch(""); setCategorySearch(e.target.value); }}
           >
             <MenuItem value="name">Name</MenuItem>
             <MenuItem value="email">Email</MenuItem>
@@ -231,14 +230,9 @@ function TableView() {
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       <div className="actions">
-                        <DeleteIcon
-                          style={{ marginRight: "2px", cursor: "pointer" }}
-                          onClick={() => {
-                            onClickDeleteRow(row._id);
-                          }}
-                        />
+                        <DeleteIcon style={{ marginRight: "2px", cursor: "pointer" }}
+                          onClick={() => { onClickDeleteRow(row._id) }} />
                         &nbsp;
-                        {/* <EditIcon style={{ marginLeft: "2px" }} /> */}
                       </div>
                     </StyledTableCell>
                   </StyledTableRow>
